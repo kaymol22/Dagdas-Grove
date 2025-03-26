@@ -22,6 +22,9 @@ export default class Camera
         this.instance = new THREE.PerspectiveCamera(35, this.sizes.width / this.sizes.height, 0.1, 100);
         this.instance.position.set(0, 4, 8);
         this.scene.add(this.instance);
+
+        globalThis.camera = this.instance;
+
     }
 
     setControls() {
@@ -29,6 +32,10 @@ export default class Camera
         this.controls.smoothTime = 0.05; // Smooth movement
         this.controls.draggingSmoothTime = 0.15;
         this.controls.azimuthRotateSpeed = 0.5;
+
+        // ACCESS TO CAM CONTROLS GLOBAL FOR HELPER HTML BUTTONS WHEN DEVELOPING 
+        globalThis.cameraControls = this.controls;
+        globalThis.THREE = THREE;
     }
 
     resize() {

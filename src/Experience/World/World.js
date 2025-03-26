@@ -3,6 +3,7 @@ import Experience from '../Experience.js';
 import Environment from './Environment.js';
 import Floor from './Floor.js';
 import Fox from './Fox.js';
+import Helpers from '../Utils/Helpers.js';
 
 export default class World {
     constructor() 
@@ -10,6 +11,7 @@ export default class World {
         this.experience = new Experience();
         this.scene = this.experience.scene;
         this.resources = this.experience.resources; // Access resources class through Experience.js
+
         
         // Test Mesh
         // const testMesh = new THREE.Mesh(
@@ -23,6 +25,7 @@ export default class World {
             this.floor = new Floor();
             this.fox = new Fox();
             this.environment = new Environment();
+            this.helpers = new Helpers();
         });
     }
     update() 
