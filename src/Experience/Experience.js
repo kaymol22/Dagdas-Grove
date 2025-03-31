@@ -2,15 +2,17 @@ import * as THREE from 'three';
 
 import Sizes from './Utils/Sizes.js';
 import Time from './Utils/Time.js';
-import Camera from './Utils/Camera.js';
+import TPCamera from './Utils/TPCamera.js';
+// import Camera from './Utils/Camera.js';
 import Renderer from './Utils/Renderer.js';
 import World from './World/World.js';
 import Resources from './Utils/Resources.js';
+
 import Debug from './Utils/Debug.js';
 
 import sources from './sources.js';
 
-let instance = null; // Singleton as we only want one 'experience'
+let instance = null; // Singleton - only want one instance of our 'Experience' class
 
 export default class Experience {
     constructor(canvas) 
@@ -31,9 +33,11 @@ export default class Experience {
         this.time = new Time();
         this.scene = new THREE.Scene();
         this.resources = new Resources(sources);
-        this.camera = new Camera();
-        this.renderer = new Renderer();
+        
+        this.tpcamera = new TPCamera();
+        // this.camera = new Camera();
         this.world = new World();
+        this.renderer = new Renderer();
 
         this.sizes.on('resize', () => {
             this.resize();
@@ -46,20 +50,20 @@ export default class Experience {
     resize() 
     {
         console.log("a resize occured");
-        this.camera.resize();
+        this.tpcamera.resize();
         this.renderer.resize();
     }
 
     update() 
     {
-        this.camera.update(this.time.delta);
+        if(this.tpcamera) this.tpcamera.update(this.time.delta);
         this.renderer.update();
-        this.world.update(); // allow fox animation to play
+        this.world.update(); // Update world for animations (fox)
     }
     
     destroy() 
     {
-        // **Would probably be better to make desctructors for each class 
+        // **Would probably be better to make desctructors for each class and call in here
         this.sizes.off('resize'); // off() method extended from EventEmitter class
         this.time.off('tick');
 
@@ -78,7 +82,7 @@ export default class Experience {
                 }
             }
         });
-        this.camera.controls.dispose();
+        // this.tpcamera.controls.dispose();
         this.renderer.instance.dispose();
         if(this.debug.active){
             this.debug.ui.destroy();

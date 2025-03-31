@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "camera-controls": "^2.10.0",
+    "cannon-es": "^0.20.0",
     "lil-gui": "^0.19.1",
     "three": "^0.160.0"
   }

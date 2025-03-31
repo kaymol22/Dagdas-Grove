@@ -26,5 +26,15 @@ export default [
         name: 'foxModel',
         type: 'gltfModel',
         path: 'models/Fox/glTF/Fox.gltf'
+    },
+    {
+        name: 'trackModel',
+        type: 'gltfModel',
+        path: 'models/Track/race-track.glb'
+    },
+    {
+        name: 'druidModel',
+        type: 'gltfModel',
+        path: 'models/Druid/glTF/druid.glb'
     }
 ]
