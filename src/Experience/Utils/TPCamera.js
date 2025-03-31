@@ -8,7 +8,7 @@ export default class TPCamera {
         this.scene = this.experience.scene;
         this.sizes = this.experience.sizes;
         this.canvas = this.experience.canvas;
-        this.camOffset = new THREE.Vector3(0, 3, -9); // Offset camera behind player
+        this.camOffset = new THREE.Vector3(0, 5, -12); // Offset camera behind player
         this.lookAheadOffset = new THREE.Vector3(0, 1.5, 3); // Offset so camera will look slightly ahead of player
 
         // Basic Perspective Camera
