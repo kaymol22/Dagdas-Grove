@@ -3,11 +3,9 @@ import * as THREE from 'three';
 import Sizes from './Utils/Sizes.js';
 import Time from './Utils/Time.js';
 import TPCamera from './Utils/TPCamera.js';
-// import Camera from './Utils/Camera.js';
 import Renderer from './Utils/Renderer.js';
 import World from './World/World.js';
 import Resources from './Utils/Resources.js';
-
 import Debug from './Utils/Debug.js';
 
 import sources from './sources.js';
@@ -17,14 +15,14 @@ let instance = null; // Singleton - only want one instance of our 'Experience' c
 export default class Experience {
     constructor(canvas) 
     {   
-        // Singleton logic, return if instance if already exists/not null
+        // Singleton logic, return experience if instance of Experience() already exists/not null
         if(instance){
             return instance;
         }
         instance = this;
 
-        // ONLY FOR RUNNING CONSOLE COMMANDS (e.g. window.experience.destroy())       DELETE BEFORE SUBMISSION
-        window.experience = this;
+        // For running console commands & fix issue with shift key interfering with panning
+        window.experience = this;   // Aware this is bad practice but I'm not writing my own CameraControls class :)
 
         this.canvas = canvas;
 
@@ -35,7 +33,6 @@ export default class Experience {
         this.resources = new Resources(sources);
         
         this.tpcamera = new TPCamera();
-        // this.camera = new Camera();
         this.world = new World();
         this.renderer = new Renderer();
 
@@ -46,9 +43,9 @@ export default class Experience {
             this.update();
         })
     }
-
+    // Basic resizing - handles changing viewport size, pixel ratio, aspect etc.
     resize() 
-    {
+    {   
         console.log("a resize occured");
         this.tpcamera.resize();
         this.renderer.resize();
@@ -57,8 +54,8 @@ export default class Experience {
     update() 
     {
         if(this.tpcamera) this.tpcamera.update(this.time.delta);
-        this.renderer.update();
-        this.world.update(); // Update world for animations (fox)
+        this.renderer.update(); // Update renderer every frame
+        this.world.update(); // Update everything in the world class evry rame
     }
     
     destroy() 

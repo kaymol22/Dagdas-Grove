@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'; 
+// import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'; - Was planning on using 
 
 import EventEmitter from './EventEmitter.js';
 
@@ -46,6 +46,7 @@ export default class Resources extends EventEmitter {
                     (file) =>
                     {
                         this.sourceLoaded(source, file);
+                        console.log(source, file);
                     }
                 )
             }
@@ -56,7 +57,7 @@ export default class Resources extends EventEmitter {
                     (file) =>
                     {
                         this.sourceLoaded(source, file);
-                        console.log(source, file);
+                        // console.log(source, file);
                     }
                 )
             }

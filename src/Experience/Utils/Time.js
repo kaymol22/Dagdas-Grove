@@ -13,6 +13,7 @@ export default class Time extends EventEmitter{
             this.tick();
         })
     }
+    // Recursive function to continuously update
     tick() {
         const currentTime = Date.now();
         this.delta = currentTime - this.current; // Get delta between frames

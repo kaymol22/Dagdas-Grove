@@ -1,41 +1,68 @@
-import EventEmitter from "./EventEmitter";
-
-export default class Input extends EventEmitter{
+export default class Input {
     constructor() {
-        super()
-
-        this.keys = {
-            forward: false, 
-            backward: false, 
-            left: false, 
-            right: false, 
-        };
-
         this.initKeyboardListeners();
     }
     
     initKeyboardListeners() {
-        window.addEventListener('keydown', (event) => this.onKeyChange(event, true));
-        window.addEventListener('keyup', (event) => this.onKeyChange(event, false));
+        this.keys = {
+            forward: false, 
+            backward: false, 
+            left: false, 
+            right: false,
+            space: false,
+            shift: false,
+        };
+        window.addEventListener('keydown', (e) => this.onKeyDown(e), false);
+        window.addEventListener('keyup', (e) => this.onKeyUp(e), false);
     }
 
-    onKeyChange(event, isPressed) {
-        switch (event.code) {
-            case 'KeyW':
-                this.keys.forward = isPressed;
-                this.trigger('move', ['forward', isPressed]);
+    onKeyDown(event) {
+        switch (event.keyCode) {
+            case 87: // w 
+                this.keys.forward = true;
                 break;
-            case 'KeyS':
-                this.keys.backward = isPressed;
-                this.trigger('move', ['backward', isPressed]);
+            case 65: // a
+                this.keys.left = true;
                 break;
-            case 'KeyA':
-                this.keys.left = isPressed;
-                this.trigger('move', ['left', isPressed]);
+            case 83: // s
+                this.keys.backward = true;
                 break;
-            case 'KeyD':
-                this.keys.right = isPressed;
-                this.trigger('move', ['right', isPressed]);
+            case 68: // d
+                this.keys.right = true;
+                break;
+            case 32: // Space
+                this.keys.space = true;
+                break;
+            case 16: // Shift
+                this.keys.shift = true;
+                break;
+            case 69: // e (shapeshift)
+                this.keys.shapeshift = true;
+                break;
+        }
+    }
+    onKeyUp(event) {
+        switch (event.keyCode) {
+            case 87: // w 
+                this.keys.forward = false;
+                break;
+            case 65: // a
+                this.keys.left = false;
+                break;
+            case 83: // s
+                this.keys.backward = false;
+                break;
+            case 68: // d
+                this.keys.right = false;
+                break;
+            case 32: // Space
+                this.keys.space = false;
+                break;
+            case 16: // Shift
+                this.keys.shift = false;
+                break;
+            case 69: // e (shapeshift)
+                this.keys.shapeshift = false;
                 break;
         }
     }

@@ -20,7 +20,10 @@ body
 
 /* Debug Buttons for Camera controls */
 .controls {
+    color: white;
     position: absolute;
+    display: flex;
+    flex-direction: column;
     top: 20px;
     left: 20px;
     background: rgba(0, 0, 0, 0.5);
