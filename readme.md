@@ -1,3 +1,4 @@
+![Alt text](static/dagdas-grove-cover.png)
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).
 Run the following commands:
